@@ -3,17 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using dotnetDMS.Data;
+using dotnetDMS.Models;
+using System.Net.Http;
 
 namespace dotnetDMS.Controllers
 {
     [Route("api/[controller]")]
     public class DocumentController : Controller
     {
+        private DmsContext _context;
+        public DocumentController()
+        {
+            _context = new DmsContext();
+        }
         // GET api/document
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Documents> Get()
         {
-            return new string[] { "doc1", "doc2" };
+
+            return _context.Documents.AsEnumerable();
         }
 
         // GET api/document/5
